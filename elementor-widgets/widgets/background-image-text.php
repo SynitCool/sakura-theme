@@ -1,0 +1,102 @@
+<?php
+
+namespace Elementor;
+
+class Background_Image_Text extends Widget_Base {
+    public function get_name() {
+		return 'Background Image Text';
+	}
+	
+	public function get_title() {
+		return 'Background Image & Text';
+	}
+	
+	public function get_icon() {
+		return 'eicon-featured-image';
+	}
+	
+	public function get_categories() {
+		return [ 'basic' ];
+	}
+
+    protected function _register_controls() {
+		$this->start_controls_section(
+			'section_title',
+			[
+				'label' => __( 'Content', 'elementor' ),
+			]
+		);
+		
+		$this->add_control(
+			'title',
+			[
+				'label' => __( 'Title', 'elementor' ),
+				'label_block' => true,
+				'type' => Controls_Manager::TEXT,
+				'placeholder' => __( 'Enter your title', 'elementor' ),
+			]
+		);
+
+		$this->add_control(
+			'subtitle',
+			[
+				'label' => __( 'Sub-title', 'elementor' ),
+				'label_block' => true,
+				'type' => Controls_Manager::TEXT,
+                'placeholder' => __( 'Enter your sub-title', 'elementor' ),
+			]
+		);
+
+		$this->add_control(
+			'link',
+			[
+				'label' => __( 'Link', 'elementor' ),
+				'type' => Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
+				'default' => [
+					'url' => '',
+				]
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
+    protected function render() {
+        $settings = $this->get_settings_for_display();
+
+        if ( empty( $settings['image']['url'] ) ) {
+			return;
+		}
+
+        $image_url = esc_url($settings['image']['url']);
+        $url = $settings['link']['url'];
+
+        $html = "
+        <div id='about' class='about'>
+            <div class='container'>
+            <div class='row'>
+                <div class='col-md-5'>
+                    <div class='titlepage'>
+                        <h2>$settings[title]</h2>
+                        <p>$settings[subtitle]</p>
+                        <a class='read_more' href='$url'> Read More</a>
+                    </div>
+                </div>
+                <div class='col-md-7'>
+                    <div class='about_img'>
+                        <figure><img src=$image_url' alt='#'></figure>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        ";
+
+        echo $html;
+    }
+
+    protected function _content_template() {
+
+    }
+}
