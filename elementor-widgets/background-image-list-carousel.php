@@ -17,7 +17,7 @@ class Background_Image_List_Carousel extends Widget_Base {
 	}
 	
 	public function get_categories() {
-		return [ 'basic' ];
+		return [ 'sakura-theme-widgets' ];
 	}
 	
 	protected function _register_controls() {

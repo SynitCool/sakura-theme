@@ -16,7 +16,7 @@ class Background_Image_Text extends Widget_Base {
 	}
 	
 	public function get_categories() {
-		return [ 'basic' ];
+		return [ 'sakura-theme-widgets' ];
 	}
 
     protected function _register_controls() {

@@ -163,6 +163,9 @@
   .text-bg h1 {
     font-size: 70px;
   }
+  ul.social_icon {
+    text-align: center;
+  }
   #myCarousel a.carousel-control-next {
     right: 42.5%;
   }
@@ -243,6 +246,9 @@
     padding: 10px 0;
     color: #fff;
   }
+  .dropdown-menu {
+    background-color: #282828;
+  }
   .navigation.navbar-dark .navbar-toggler {
     border: inherit;
     float: right;
@@ -264,6 +270,11 @@
     padding-top: 5px;
     float: left;
     width: 140px;
+  }
+
+  .footer-logo {
+    padding: 5px;
+    float: left;
   }
   .banner {
     min-height: 550px;
@@ -371,6 +382,9 @@
   .navigation.navbar-dark .navbar-nav .nav-link {
     padding: 10px 0;
     color: #fff;
+  }
+  .dropdown-menu {
+    background-color: #282828;
   }
   .navigation.navbar-dark .navbar-toggler {
     float: right;

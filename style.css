@@ -15,3 +15,100 @@
   transform: translateX(-50%);
   z-index: 5;
 }
+
+/* FOOTER */
+
+.social_icon span {
+  display: none;
+}
+
+.social_icon li a[href*="instagram.com"] .fa:before,
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+.social_icon li a[href*="twitter.com"] .fa:before,
+.fa-twitter:before {
+  content: "\f099";
+}
+
+.social_icon li a[href*="facebook.com"] .fa:before,
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+.social_icon li a[href*="github.com"] .fa:before,
+.fa-github:before {
+  content: "\f09b";
+}
+
+.social_icon li a[href*="/feed"] .fa:before,
+.fa-rss:before {
+  content: "\f09e";
+}
+
+.social_icon li a[href*="pinterest.com"] .fa:before,
+.fa-pinterest:before {
+  content: "\f0d2";
+}
+
+.social_icon li a[href*="plus.google.com"] .fa:before,
+.fa-google-plus:before {
+  content: "\f0d5";
+}
+
+.social_icon li a[href*="linkedin.com"] .fa:before,
+.fa-linkedin:before {
+  content: "\f0e1";
+}
+
+.social_icon li a[href*="youtube.com"] .fa:before,
+.fa-youtube:before {
+  content: "\f167";
+}
+
+.social_icon li a[href*="instagram.com"] .fa:before,
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+.social_icon li a[href*="flickr.com"] .fa:before,
+.fa-flickr:before {
+  content: "\f16e";
+}
+
+.social_icon li a[href*="tumblr.com"] .fa:before,
+.fa-tumblr:before {
+  content: "\f173";
+}
+
+.social_icon li a[href*="dribbble.com"] .fa:before,
+.fa-dribbble:before {
+  content: "\f17d";
+}
+
+.social_icon li a[href*="skype.com"] .fa:before,
+.fa-skype:before {
+  content: "\f17e";
+}
+
+.social_icon li a[href*="foursquare.com"] .fa:before,
+.fa-foursquare:before {
+  content: "\f180";
+}
+
+.social_icon li a[href*="vimeo.com"] .fa:before,
+.fa-vimeo-square:before {
+  content: "\f194";
+}
+
+.social_icon li a[href*="spotify.com"] .fa:before,
+.fa-spotify:before {
+  content: "\f1bc";
+}
+
+.social_icon li a[href*="soundcloud.com"] .fa:before,
+.fa-soundcloud:before {
+  content: "\f1be";
+}

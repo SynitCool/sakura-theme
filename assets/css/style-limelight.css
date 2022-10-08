@@ -47,6 +47,10 @@ body {
   font-weight: normal;
 }
 
+.theme-color {
+  color: #35bff8;
+}
+
 a {
   color: #1f1f1f;
   text-decoration: none !important;
@@ -940,9 +944,16 @@ button {
 /** footer **/
 
 .footer {
-  background: #202020;
-  padding-top: 80px;
+  background: #0083dd;
   text-align: center;
+}
+
+.footer-logo {
+  text-align: right;
+}
+
+.footer-logo img {
+  display: block;
 }
 
 .footer h3 {
@@ -957,9 +968,9 @@ button {
 }
 
 ul.social_icon {
-  padding-bottom: 14px;
-  width: 100%;
-  text-align: left;
+  /* padding-bottom: 14px;
+  width: 100%; */
+  text-align: right;
 }
 
 ul.social_icon li {
@@ -1015,7 +1026,9 @@ ul.conta li a {
 }
 
 ul.link_menu li {
+  /* display: inline-block; */
   display: block;
+  /* padding: 5px; */
   text-align: left;
 }
 

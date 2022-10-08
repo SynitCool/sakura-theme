@@ -47,7 +47,7 @@
                                  $logo = wp_get_attachment_image_src($custom_logo_id);
                               }
                            ?>
-                              <a href="/wordpress"><img src="http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png" alt="logo" /></a>
+                              <a href="/wordpress"><img src=<?php echo $logo[0] ?? 'http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png';?> alt="logo" /></a>
                            </div>
                         </div>
                      </div>
@@ -58,18 +58,7 @@
                         <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <?php
-                              wp_nav_menu(
-                                 array(
-                                    'menu' => 'primary',
-                                    'container' => '',
-                                    'theme_locations' => 'primary',
-                                    'menu_class'    => 'navbar-nav mx-auto',
-                                    'list_item_class'  => 'nav-item',
-                                    'link_class'   => 'nav-link'
-                                 )
-                              );
-                           ?>
+                           <?php sakura_theme_header_menu(); ?>
                         </div>
                      </nav>
                   </div>
