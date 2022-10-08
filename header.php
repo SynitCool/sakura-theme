@@ -43,7 +43,7 @@
                                  $logo = wp_get_attachment_image_src($custom_logo_id);
                               }
                            ?>
-                              <a href="/wordpress"><img src=<?php echo $logo[0] ?? 'http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png';?> alt="logo" /></a>
+                              <a href="/"><img src=<?php echo $logo[0] ?? 'http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png';?> alt="logo" /></a>
                            </div>
                         </div>
                      </div>
