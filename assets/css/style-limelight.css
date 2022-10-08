@@ -446,25 +446,25 @@ button {
   transition: ease-in all 0.5s;
 }
 
-/** about section **/
+/** image_text section **/
 
-.about {
+.image_text {
   background-color: #fff;
   padding-top: 95px;
 }
 
-.about .titlepage {
+.image_text .titlepage {
   text-align: left;
   margin-top: 41%;
   padding-bottom: 0;
   margin-right: -20px;
 }
 
-.about .titlepage h2 {
+.image_text .titlepage h2 {
   margin-bottom: 35px;
 }
 
-.about .titlepage p {
+.image_text .titlepage p {
   font-weight: 300;
   color: #2e2d2d;
   font-size: 17px;
@@ -472,11 +472,11 @@ button {
   padding-bottom: 35px;
 }
 
-.about_img {
+.image_text_img {
   padding: 40px 30px 45px 30px;
 }
 
-/* .about_img::before {
+/* .image_text_img::before {
   position: absolute;
   content: "";
   background: url(../images/vg.png);
@@ -487,17 +487,17 @@ button {
   border-radius: 5px;
 } */
 
-.about_img figure {
+.image_text_img figure {
   margin: 0;
 }
 
-.about_img figure img {
+.image_text_img figure img {
   width: 100%;
   z-index: 9999;
   position: relative;
 }
 
-/** end about section **/
+/** end image_text section **/
 
 /** service section **/
 

@@ -36,7 +36,7 @@
   .text-bg h1 {
     font-size: 76px;
   }
-  .about_img::before {
+  .image_text_img::before {
     height: 90%;
   }
   .mar_top {
@@ -100,13 +100,13 @@
     font-size: 28px;
     line-height: 23px;
   }
-  .about .titlepage p {
+  .image_text .titlepage p {
     font-size: 15px;
     line-height: 28px;
     padding-bottom: 18px;
     padding-right: 13px;
   }
-  .about_img::before {
+  .image_text_img::before {
     height: 77%;
   }
   .service_box h3 {
@@ -180,7 +180,7 @@
   #myCarousel .carousel-control-prev:focus {
     left: 40.5%;
   }
-  .about .titlepage {
+  .image_text .titlepage {
     margin-right: 0;
     padding-bottom: 30px;
   }
@@ -298,7 +298,7 @@
   #myCarousel .carousel-control-prev:focus {
     left: 37.5%;
   }
-  .about .titlepage {
+  .image_text .titlepage {
     margin-right: 0;
     padding-bottom: 30px;
   }

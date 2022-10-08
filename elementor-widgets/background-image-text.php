@@ -96,7 +96,7 @@ class Background_Image_Text extends Widget_Base {
         $url = $settings['link']['url'];
 
         $html_with_link = "
-        <div id='about' class='about'>
+        <div id='image_text' class='image_text'>
             <div class='container'>
             <div class='row'>
                 <div class='col-md-5'>
@@ -107,7 +107,7 @@ class Background_Image_Text extends Widget_Base {
                     </div>
                 </div>
                 <div class='col-md-7'>
-                    <div class='about_img'>
+                    <div class='image_text_img'>
                         <figure><img src=$image_url' alt='#'></figure>
                     </div>
                 </div>
@@ -117,7 +117,7 @@ class Background_Image_Text extends Widget_Base {
         ";
 
 		$html_no_link = "
-        <div id='about' class='about'>
+        <div id='image_text' class='image_text'>
             <div class='container'>
             <div class='row'>
                 <div class='col-md-5'>
@@ -127,7 +127,7 @@ class Background_Image_Text extends Widget_Base {
                     </div>
                 </div>
                 <div class='col-md-7'>
-                    <div class='about_img'>
+                    <div class='image_text_img'>
                         <figure><img src=$image_url' alt='#'></figure>
                     </div>
                 </div>
