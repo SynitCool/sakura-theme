@@ -12,40 +12,21 @@ class Widgets {
 	}
 
 	protected function __construct() {
-		require_once('background-image-list-carousel.php');
-		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
-	}
-
-	public function register_widgets() {
-		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Background_Image_List_Carousel() );
-	}
-
-}
-
-class Widgets_2 {
-
-	protected static $instance = null;
-
-	public static function get_instance() {
-		if ( ! isset( static::$instance ) ) {
-			static::$instance = new static;
-		}
-
-		return static::$instance;
-	}
-
-	protected function __construct() {
 		require_once('background-image-text.php');
+		require_once('background-image-list-carousel.php');
+		require_once('content-list-image-text.php');
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 	}
 
 	public function register_widgets() {
 		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Background_Image_Text() );
+		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Background_Image_List_Carousel() );
+		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Content_List_Image_Text() );
 	}
 
 }
 
-class Category {
+class Categories {
     protected static $instance = null;
 
 	public static function get_instance() {
@@ -74,6 +55,5 @@ class Category {
 add_action( 'init', 'my_elementor_init' );
 function my_elementor_init() {
 	Widgets::get_instance();
-	Widgets_2::get_instance();
-	Category::get_instance();
+	Categories::get_instance();
 }

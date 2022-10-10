@@ -95,13 +95,17 @@ class Background_Image_Text extends Widget_Base {
         $image_url = esc_url($settings['image']['url']);
         $url = $settings['link']['url'];
 
+		$explode_title = explode(" ", $settings['title']);
+        $first_word_title = $explode_title[0];
+        $rest_word_title = implode(" ",array_slice($explode_title, 1));
+
         $html_with_link = "
         <div id='image_text' class='image_text'>
             <div class='container'>
             <div class='row'>
                 <div class='col-md-5'>
                     <div class='titlepage'>
-                        <h2>$settings[title]</h2>
+                        <h2><span class='theme-color'>$first_word_title</span> $rest_word_title</h2>
                         <p>$settings[subtitle]</p>
                         <a class='read_more' href='$url'> Read More</a>
                     </div>
@@ -122,7 +126,7 @@ class Background_Image_Text extends Widget_Base {
             <div class='row'>
                 <div class='col-md-5'>
                     <div class='titlepage'>
-                        <h2>$settings[title]</h2>
+						<h2><span class='theme-color'>$first_word_title</span> $rest_word_title</h2>
                         <p>$settings[subtitle]</p>
                     </div>
                 </div>

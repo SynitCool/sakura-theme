@@ -521,6 +521,11 @@ button {
   color: #181818;
 }
 
+.service img {
+  height: 91px;
+  width: 91px;
+}
+
 .service .read_more {
   margin: 0 auto;
   display: block;

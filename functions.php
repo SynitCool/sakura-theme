@@ -5,8 +5,25 @@ require_once("elementor-widgets/widgets.php");
 
 
 function sakura_theme_theme_support() {
-    add_theme_support("title-tag");
+    /*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+     */
+	add_theme_support( 'title-tag' );
+
+    /**
+	 * Add support for the custom logo functionality
+	 */
     add_theme_support("custom-logo");
+
+    /*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
 
     // This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
