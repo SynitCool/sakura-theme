@@ -18,12 +18,7 @@
    <body class="main-layout">
       <!-- loader  -->
       <div class="loader_bg">
-         <div class="loader">
-            <img 
-            src=<?php 
-            echo get_template_directory_uri() . "/assets/images/loading.gif"
-            ?> 
-            alt="#"/>
+         <?php sakura_theme_loading(); ?>
       </div>
       </div>
       <!-- end loader -->
@@ -37,13 +32,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                           <?php
-                              if (function_exists("the_custom_logo")) {
-                                 $custom_logo_id = get_theme_mod("custom_logo");
-                                 $logo = wp_get_attachment_image_src($custom_logo_id);
-                              }
-                           ?>
-                              <a href="/"><img src=<?php echo $logo[0] ?? 'http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png';?> alt="logo" /></a>
+                              <?php sakura_theme_get_header_logo(); ?>
                            </div>
                         </div>
                      </div>

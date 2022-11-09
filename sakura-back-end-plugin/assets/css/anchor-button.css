@@ -1,0 +1,23 @@
+.button {
+  background-color: #00ff55;
+  border-radius: 5px;
+  color: white;
+  padding: 0.5em;
+  text-decoration: none;
+}
+
+.button:focus,
+.button:hover {
+  background-color: #35bff8;
+  color: White;
+}
+
+.content {
+  display: none;
+  margin: 1em 0;
+}
+
+.content.active,
+.no-js .content {
+  display: block;
+}

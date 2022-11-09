@@ -12,9 +12,10 @@ class Widgets {
 	}
 
 	protected function __construct() {
-		require_once('background-image-text.php');
-		require_once('background-image-list-carousel.php');
-		require_once('content-list-image-text.php');
+		require_once('class-background-image-text.php');
+		require_once('class-background-image-list-carousel.php');
+		require_once('class-content-list-image-text.php');
+		require_once('class-profile-database.php');
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 	}
 
@@ -22,6 +23,7 @@ class Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Background_Image_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Background_Image_List_Carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Content_List_Image_Text() );
+		\Elementor\Plugin::instance()->widgets_manager->register( new \Elementor\Profile_Database() );
 	}
 
 }

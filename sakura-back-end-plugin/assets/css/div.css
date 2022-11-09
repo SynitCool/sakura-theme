@@ -1,0 +1,71 @@
+body {
+  font: 400 16px/1.5em "Open Sans", sans-serif;
+}
+
+#wpcontent {
+  padding-left: 0%;
+}
+
+.main {
+  padding: 32px;
+  background: #fff;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.admin-menu-bar {
+}
+
+.admin-content {
+}
+
+.box {
+  width: fit-content;
+  background-color: #21d4fd;
+  margin: 5px;
+  align-items: center;
+}
+
+.item-center {
+  justify-content: center;
+}
+
+.item-right {
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.padding-small {
+  padding: 5px;
+}
+
+.icon-size {
+  font-size: 50px;
+}
+
+.transparent-color {
+  background-color: transparent;
+}
+
+.green-color {
+  background-color: #00ff4c;
+}
+
+.red-color {
+  background-color: #ff1100;
+}
+
+.icon-button {
+  font-size: 100px;
+  padding: 10px;
+  border-radius: 15%;
+}

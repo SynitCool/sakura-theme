@@ -1,8 +1,21 @@
 <?php
 
-// elementor
-require_once("elementor-widgets/widgets.php");
+// sakura back end plugin
+require_once("sakura-back-end-plugin/sakura-back-end-plugin.php");
 
+// checking function
+if (!function_exists('is_plugin_active')) {
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+}
+
+function sakura_theme_init() {
+    // checking elementor installed
+    if (is_plugin_active( "elementor/elementor.php" )) {
+		require_once("elementor-widgets/widgets.php");
+	}
+}
+
+sakura_theme_init();
 
 function sakura_theme_theme_support() {
     /*
