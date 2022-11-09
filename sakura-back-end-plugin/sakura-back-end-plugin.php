@@ -52,7 +52,7 @@ add_action("admin_enqueue_scripts", "load_scripts");
 
 // menus
 require_once("admin/sakura-admin-bar.php");
-require_once("admin/sakura-admin-menus.php");
+require_once("menus.php");
 
 // init
 require_once("admin/sakura-admin-init.php");

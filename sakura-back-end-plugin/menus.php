@@ -1,5 +1,6 @@
 <?php
-require_once("sakura-admin.php");
+require_once("admin/sakura-admin.php");
+require_once("options/sakura-options.php");
 
 add_action( 'admin_menu', 'menu_init');
 
@@ -33,9 +34,21 @@ function admin_menu_add_external_links_as_submenu_jquery() {
 function menu_init() {
     add_menu_page( 
         "Sakura Admin", 
-        "Sakura Admin Menu", 
+        "Sakura Admin", 
         "manage_options", 
         "sakura_admin",
-        "new_menu_page"
+        "submenu_page",
+        $icon_url = "dashicons-admin-generic",
+        $position = 2
+    );
+
+    add_submenu_page( 
+        "sakura_admin", 
+        "Sakura Database",
+        "Sakura Database",
+        "manage_options", 
+        "sakura_database",
+        "new_menu_page",
+        $position = 1
     );
 }
