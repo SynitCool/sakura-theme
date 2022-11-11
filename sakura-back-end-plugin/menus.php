@@ -1,6 +1,6 @@
 <?php
+require_once("database/sakura-database.php");
 require_once("admin/sakura-admin.php");
-require_once("options/sakura-options.php");
 
 add_action( 'admin_menu', 'menu_init');
 

@@ -1,5 +1,5 @@
 <?php
-require_once('sakura-admin.php');
+require_once('sakura-database.php');
 
 add_action( 'admin_init', 'init' );
 
