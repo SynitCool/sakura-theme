@@ -242,10 +242,10 @@ function admin_menu_bar_add_table() {
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number" min="1" max="10" value="<?php echo $_COOKIE["new_table_length"];?>" name="new_table_length"/>
+                                    <input type="number" min="1" max="10" value="<?php echo $_COOKIE["new_table_length"];?>" name="new-table-length"/>
                                 </td>
                                 <td>
-                                    <input type="submit" value="Update" name="update_new_table_length" />
+                                    <input type="submit" value="Update" name="update-new-table-length" />
                                 </td>
                             </tr>
                         </table>

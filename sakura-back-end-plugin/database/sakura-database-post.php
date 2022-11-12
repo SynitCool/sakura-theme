@@ -34,7 +34,7 @@ if (isset($_POST["show-column-and-row"]) && isset($_POST["table-name"])) {
     header("Refresh:0");
 }
 
-if (isset($_POST["new_table_length"]) && isset($_POST["update_new_table_length"])) {
-    setcookie("new_table_length", $_POST["new_table_length"], time() + (86400 * 30), "/");
+if (isset($_POST["new-table-length"]) && isset($_POST["update-new-table-length"])) {
+    setcookie("new_table_length", $_POST["new-table-length"], time() + (86400 * 30), "/");
     header("Refresh:0");
 }
