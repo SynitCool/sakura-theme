@@ -88,6 +88,33 @@ function create_database($database_name) {
     $wpdb->get_results("CREATE DATABASE $database_name");
 }
 
+function create_table($database_name, $table_name, $column_types) {
+    global $wpdb;
+
+    $convert_types = array("number" => "BIGINT", "text" => "LONGTEXT", "date" => "DATE");
+
+    $column_types_query = "(";
+    foreach($column_types as $column => $type) {
+        if (array_key_last($column_types) == $column) {
+            $column_types_query .= "$column $convert_types[$type]";
+            continue;
+        }
+
+        $column_types_query .= "$column $convert_types[$type],";
+    }
+    $column_types_query .= ");";
+
+    $query = "CREATE TABLE $database_name.$table_name " . $column_types_query;
+
+    $wpdb->get_results($query);
+}
+
+function delete_table($database_name, $table_name) {
+    global $wpdb;
+
+    $wpdb->get_results("DROP TABLE $database_name.$table_name");
+}
+
 function delete_database($database_name) {
     global $wpdb;
 

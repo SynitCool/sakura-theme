@@ -1,0 +1,24 @@
+body {
+  background-color: #ff7276;
+}
+
+.snow-image {
+  background: url("https://assets.stickpng.com/images/5847d74ccef1014c0b5e4806.png");
+  background-size: cover;
+  align-items: flex-end;
+  display: flex;
+  position: relative;
+  height: initial;
+}
+
+.header {
+  background: none;
+}
+
+.image_text {
+  background: none;
+}
+
+.footer {
+  background: linear-gradient(#123, #111);
+}

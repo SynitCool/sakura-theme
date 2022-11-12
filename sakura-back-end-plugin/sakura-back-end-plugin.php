@@ -42,6 +42,7 @@ function load_scripts() {
     // wp_enqueue_script("sakura_back_end_menu_bar", get_template_directory_uri() . "/sakura-back-end-plugin/assets/js/menu-bar.js", array() , $version, true);
     // wp_enqueue_script("sakura_back_end_states", get_template_directory_uri() . "/sakura-back-end-plugin/assets/js/states.js", array() , $version, true);
     wp_enqueue_script("sakura_back_end_main", get_template_directory_uri() . "/sakura-back-end-plugin/assets/js/main.js", array() , $version, true);
+    wp_enqueue_script("sakura_back_end_modal-box", get_template_directory_uri() . "/sakura-back-end-plugin/assets/js/modal-box.js", array() , $version, true);
 }
 
 // add styles for admin

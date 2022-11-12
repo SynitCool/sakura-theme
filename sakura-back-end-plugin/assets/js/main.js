@@ -6,9 +6,36 @@ function setTableState(table_name) {
   setState("selected_table", table_name);
 }
 
+function activateEditMode(edit_mode) {
+  if (edit_mode == "on") {
+    setState("edit_mode", "off");
+  }
+
+  if (edit_mode == "off") {
+    setState("edit_mode", "on");
+  }
+}
+
+function setTempDatabaseState(database_name) {
+  setTempState("temp_database", database_name);
+}
+
+function setTempTableState(table_name) {
+  setTempState("temp_table", table_name);
+}
+
 function setState(key, value) {
   const date = new Date();
   date.setTime(date.getTime() + 86400 * 30);
+  let expires = "expires=" + date.toUTCString();
+  document.cookie = key + "=" + value + ";" + expires + ";path=/";
+
+  location.reload();
+}
+
+function setTempState(key, value) {
+  const date = new Date();
+  date.setTime(date.getTime() + 86400);
   let expires = "expires=" + date.toUTCString();
   document.cookie = key + "=" + value + ";" + expires + ";path=/";
 
@@ -81,4 +108,12 @@ function getAdminCookie() {
   }
 
   return adminCookie;
+}
+
+function deleteDatabaseButton(database_name) {
+  setTempDatabaseState(database_name);
+}
+
+function deleteTableButton(table_name) {
+  setTempTableState(table_name);
 }

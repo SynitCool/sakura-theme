@@ -22,12 +22,6 @@ body {
   width: 100%;
 }
 
-.admin-menu-bar {
-}
-
-.admin-content {
-}
-
 .box {
   width: fit-content;
   background-color: #21d4fd;
@@ -50,6 +44,7 @@ body {
 
 .icon-size {
   font-size: 50px;
+  padding: 5px;
 }
 
 .transparent-color {
@@ -64,8 +59,84 @@ body {
   background-color: #ff1100;
 }
 
+.yellow-color {
+  background-color: #e5ff00;
+}
+
 .icon-button {
   font-size: 100px;
   padding: 10px;
   border-radius: 15%;
+}
+
+.explorer .type-bar {
+  border: none;
+}
+
+.explorer {
+  border: none;
+}
+
+.explorer td {
+  border: 1px solid black;
+}
+
+.scroll-table {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.column-row,
+.table-head,
+.table-data {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.add-table {
+  justify-content: center;
+  text-align: center;
+}
+
+.add-table td {
+  padding: 0 15px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 25px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
