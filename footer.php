@@ -6,35 +6,26 @@ if (current_season() == "default") {
   ?>
         <footer class="text-center christmas-footer text-lg-start text-light">
           <div class="col">
-            <div class="row christmas-header-footer border-bottom">
-              <div class="col">
-                <img src="https://firebasestorage.googleapis.com/v0/b/part-of-images.appspot.com/o/christmas%2Fsilky-christmas-wreath.png?alt=media" width="150" />
-              </div>
-              <div class="col">
-                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                  <img src="http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png" alt="logo"/>
-                </a>
-              </div>
-              <div class="col">
-                <img src="https://firebasestorage.googleapis.com/v0/b/part-of-images.appspot.com/o/christmas%2Fsilky-christmas-wreath.png?alt=media" width="150" />
-              </div>
+            <div class="col">
+              <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="http://www.sman1cikarangutara.sch.id/wp-content/uploads/2022/03/LOGO-PANJANG-300x70.png" alt="logo" /></a>
             </div>
-            <div class="row christmas-content-footer border-bottom">
-              <div class="col">
-                <h6 class="text-uppercase fw-bold mb-4 text-light">Contact Us</h6>
+            <div class="col-md-5 mx-auto justify-content-center justify-content-lg-between p-4">
+              <span>Get connected with us on social networks:</span>
+              <br/>
+              <?php sakura_theme_social_icons(); ?>
+              <hr/>
+            </div>
+            <div class="row border-bottom p-4">
+              <div class="col p-4">
+                <h6 class="text-uppercase fw-bold mb-4 text-light">About Website</h6>
                 <p>
-                  <i class="fa fa-home me-3"></i> Jl. Ki Hajar Dewantara No.23 Karangasih, Kec. Cikarang Utara Bekasi - Jawa Barat 17530</p>
-                <p>
-                  <i class="fa fa-envelope me-3"></i>
-                  info@sman1cikarangutara.sch.id
+                    This website is using sakura-theme. Sakura-theme is an awesome wordpress theme that develop
+                    for SMAN 1 Cikarang Utara. Sakura-theme is an open source project.
                 </p>
-                <p><i class="fa fa-phone me-3"></i> 0812-9188-8474</p>
-                <p><i class="fa fa-print me-3"></i> 0812-9188-8474</p>
+                <p>For more info about sakura-theme, head to:</p>
+                <a class="text-light" href="https://github.com/SynitCool/sakura-theme">https://github.com/SynitCool/sakura-theme</a>
               </div>
-              <div class="col-sm-6">
-                <h1>MERRY CHRISTMAS!</h1>
-              </div>
-              <div class="col">
+              <div class="col p-4">
                 <h6 class="text-uppercase fw-bold mb-4 text-light">Contact Us</h6>
                 <p>
                   <i class="fa fa-home me-3"></i> Jl. Ki Hajar Dewantara No.23 Karangasih, Kec. Cikarang Utara Bekasi - Jawa Barat 17530</p>
@@ -46,12 +37,12 @@ if (current_season() == "default") {
                 <p><i class="fa fa-print me-3"></i> 0812-9188-8474</p>
               </div>
             </div>
-            <div class="col p-4">
-                © 2022 Copyright
-                <p class="fw-bold">SMAN 1 CIKARANG UTARA</p>
-                <br/>
-                Developed by
-                <a class="text-reset fw-bold theme-color" href="https://www.instagram.com/synitiscool/">SynitIsCool</a>
+            <div class="col p-4 text-center">
+              © 2022 Copyright
+              <p class="fw-bold">SMAN 1 CIKARANG UTARA</p>
+              <br/>
+              Developed by
+              <a class="text-reset fw-bold theme-color" href="https://www.instagram.com/synitiscool/">SynitIsCool</a>
             </div>
           </div>
         </footer>
