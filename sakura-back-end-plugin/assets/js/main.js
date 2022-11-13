@@ -24,6 +24,10 @@ function setTempTableState(table_name) {
   setTempState("temp_table", table_name);
 }
 
+function setTempRowState(row_values) {
+  setTempState("temp_row", row_values);
+}
+
 function setState(key, value) {
   const date = new Date();
   date.setTime(date.getTime() + 86400 * 30);
@@ -116,4 +120,8 @@ function deleteDatabaseButton(database_name) {
 
 function deleteTableButton(table_name) {
   setTempTableState(table_name);
+}
+
+function deleteRowButton(row_values) {
+  setTempRowState(row_values);
 }

@@ -167,3 +167,36 @@ function delete_database($database_name) {
     $wpdb->get_results("DROP DATABASE $database_name");
 }
 
+function delete_row($database_name, $table_name, $column_values) {
+    global $wpdb;
+
+    $query = "DELETE FROM $database_name.$table_name WHERE ";
+
+    $column_values_explode = explode("|", $column_values);
+    $column_row = array();
+    for ($i = 0; $i < count($column_values_explode); ++$i) {
+        $current_index = $column_values_explode[$i];
+
+        if ($current_index == '') continue;
+        
+        $current_index_explode = explode("=", $current_index);
+
+        $column = $current_index_explode[0];
+        $row = $current_index_explode[1];
+
+        $column_row[$column] = $row;
+    }
+
+    foreach($column_row as $key => $value) {
+        if (array_key_last($column_row) == $key) {
+            $query .= "$key='$value'";
+            continue;
+        }
+
+        $query .= "$key='$value' AND ";
+
+    }
+
+    $query_results = $wpdb->get_results($query);
+} 
+

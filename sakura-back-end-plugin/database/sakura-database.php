@@ -485,11 +485,14 @@ function admin_content_column_row() {
                     if ($_COOKIE["edit_mode"] == "on") {
                         for($i = 0; $i < count($rows); ++$i) {
                             $current_row = $rows[$i];
+                            $column_row = "";
     
                             ?>
                                 <tr class="table-row">
                                     <?php 
                                         foreach ($current_row as $key => $value) {
+                                            $column_row .= "$key=$value|";
+
                                             ?> 
                                                 <td class="table-data"><?php echo $value ?></td>
                                             <?php
@@ -497,7 +500,7 @@ function admin_content_column_row() {
                                         ?>
                                             <td class="table-data">
                                                 <div class="box square transparent-color">
-                                                    <label title="Delete Your Row">
+                                                    <label title="Delete Your Row" onClick="deleteRowButton('<?php echo $column_row?>')">
                                                         <i class="fa fa-times icon-size red-color icon-button"></i>
                                                     </label>
                                                 </div>
