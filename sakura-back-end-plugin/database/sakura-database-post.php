@@ -14,6 +14,12 @@ if (isset($_POST["add-new-table"])) {
     create_table($_COOKIE["selected_database"], $table_name, $merge_column_types);
 }
 
+if (isset($_POST["add-new-row"])) {
+    $values = list_post_number("column");
+
+    add_all_row($_COOKIE["selected_database"], $_COOKIE["selected_table"], $values);
+}
+
 // Handle button and text post
 if (isset($_POST["add-database"]) && isset($_POST["database-name"])){
     create_database($_POST["database-name"]);

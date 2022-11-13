@@ -10,6 +10,10 @@ require_once("sakura-database-cookie.php");
 require_once("sakura-database-post.php");
 
 function new_menu_page() {
+    // global $wpdb;
+
+    // $query = $wpdb->get_results("DESCRIBE ".$_COOKIE["selected_database"].".".$_COOKIE["selected_table"]);
+
     ?>
         <p>
             <?php
@@ -100,6 +104,10 @@ function admin_menu_bar() {
                         if (current_state() == "table") {
                             admin_menu_bar_add_table();
                         }
+
+                        if (current_state() == "column-row") {
+                            admin_menu_bar_add_column_row();
+                        }
                     ?>
                     <div class="box square transparent-color">
                         <label title="Open Edit Mode" onClick="activateEditMode('<?php echo $_COOKIE["edit_mode"] ?>')">
@@ -161,44 +169,6 @@ function admin_content_title() {
     <?php
 }
 
-function admin_content_column_row() {
-    $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
-    $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row");
-
-    ?>
-        <div class="scroll-table">
-            <table class="column-row">
-                <tr class="table-row">
-                    <?php 
-                        foreach ($columns as $column) {
-                            ?>
-                                <th class="table-head"><?php echo $column ?></th>
-                            <?php
-                        }
-                    ?>
-                </tr>
-                <?php
-                    for($i = 0; $i < count($rows); ++$i) {
-                        $current_row = $rows[$i];
-
-                        ?>
-                            <tr class="table-row">
-                                <?php 
-                                    foreach ($current_row as $key => $value) {
-                                        ?> 
-                                            <td class="table-data"><?php echo $value ?></td>
-                                        <?php
-                                    }
-                                ?>
-                            </tr>
-                        <?php
-                    }
-                ?>
-            </table>
-        </div>
-    <?php
-}
-
 function admin_menu_bar_add_database() {
     ?>
         <div id="addModal" class="modal">
@@ -213,7 +183,7 @@ function admin_menu_bar_add_database() {
                                     <label>Database Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="database-name"/>
+                                    <input type="text" name="database-name" required/>
                                 </td>
                                 <td>
                                     <input type="submit" name="add-database" value="Add Database"/>
@@ -233,16 +203,16 @@ function admin_menu_bar_add_table() {
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="flex-col">
+                    <h3>Adding New Table</h3>
+                    <hr/>
                     <form method="post">
-                        <h3>Adding New Table</h3>
-                        <hr/>
                         <table>
                             <tr>
                                 <label>Column Length</label>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number" min="1" max="10" value="<?php echo $_COOKIE["new_table_length"];?>" name="new-table-length"/>
+                                    <input type="number" min="1" max="10" value="<?php echo $_COOKIE["new_table_length"];?>" name="new-table-length" required/>
                                 </td>
                                 <td>
                                     <input type="submit" value="Update" name="update-new-table-length" />
@@ -250,13 +220,15 @@ function admin_menu_bar_add_table() {
                             </tr>
                         </table>
                         <hr/>
+                    </form>
+                    <form method="post">
                         <table>
                             <tr>
                                 <label>Table Name</label>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" maxlength=20 name="table-name"/>
+                                    <input type="text" maxlength=20 name="table-name" required/>
                                 </td>
                             </tr>
                         </table>
@@ -276,7 +248,7 @@ function admin_menu_bar_add_table() {
                                     ?>
                                         <tr>
                                             <td>
-                                                <input type="text" maxlength="20" name=<?php echo "column-new-table-" . $i ?> />
+                                                <input type="text" maxlength="20" name=<?php echo "column-new-table-" . $i ?> required/>
                                             </td>
                                             <td>
                                                 <p>=></p>
@@ -295,6 +267,78 @@ function admin_menu_bar_add_table() {
                         </table>
                         <hr/>
                         <input type="submit" value="Add Table" name="add-new-table" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php
+}
+
+function admin_menu_bar_add_column_row() {
+    ?>
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="flex-col">
+                    <form method="post">
+                        <h3>Adding New Row</h3>
+                        <hr/>
+                        <table class="add-table">
+                            <tr>
+                                <td>
+                                    <p>Column</p>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <p>Type</p>
+                                </td>
+                                <td>
+                                    <p>Value</p>
+                                </td>
+                            </tr>
+                            <?php
+                                $column_types = get_column_type_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
+                                $index = 0;
+                                foreach ($column_types as $column => $type) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <input type="text" maxlength="20" readonly value="<?php echo $column ?>"/>
+                                            </td>
+                                            <td>
+                                                <p>=></p>
+                                            </td>
+                                            <td>
+                                                <select disabled>
+                                                    <?php
+                                                        $list_types = array("number", "text", "date");
+                                                        foreach ($list_types as $l_type) {
+                                                            if ($type == $l_type) {
+                                                                ?>
+                                                                    <option value="<?php echo $l_type ?>" selected><?php echo ucfirst($l_type) ?></option>
+                                                                <?php
+                                                                continue;
+                                                            }
+
+                                                            ?>
+                                                                <option value="<?php echo $l_type?>"><?php echo ucfirst($l_type) ?></option>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="<?php echo $type ?>" name="column-<?php echo $index?>" required />
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    $index += 1;
+                                }
+                            ?>
+                        </table>
+                        <hr/>
+                        <input type="submit" value="Add Row" name="add-new-row" />
                     </form>
                 </div>
             </div>
@@ -387,6 +431,86 @@ function admin_content_database() {
                 }
             ?>
         </table>
+    <?php
+}
+
+function admin_content_column_row() {
+    $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
+    $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row");
+
+    ?>
+        <div class="scroll-table">
+            <table class="column-row">
+                <tr class="table-row">
+                    <?php 
+                        if ($_COOKIE["edit_mode"] == "off") {
+                            foreach ($columns as $column) {
+                                ?>
+                                    <th class="table-head"><?php echo $column ?></th>
+                                <?php
+                            }
+                        }
+
+                        if ($_COOKIE["edit_mode"] == "on") {
+                            foreach ($columns as $column) {
+                                ?>
+                                    <th class="table-head"><?php echo $column ?></th>
+                                <?php
+                            }
+                            ?>
+                                <th class="table-head">Edit</th>
+                            <?php
+                        }
+                    ?>
+                </tr>
+                <?php
+                    if ($_COOKIE["edit_mode"] == "off") {
+                        for($i = 0; $i < count($rows); ++$i) {
+                            $current_row = $rows[$i];
+    
+                            ?>
+                                <tr class="table-row">
+                                    <?php 
+                                        foreach ($current_row as $key => $value) {
+                                            ?> 
+                                                <td class="table-data"><?php echo $value ?></td>
+                                            <?php
+                                        }
+                                    ?>
+                                </tr>
+                            <?php
+                        }
+                    }
+
+                    if ($_COOKIE["edit_mode"] == "on") {
+                        for($i = 0; $i < count($rows); ++$i) {
+                            $current_row = $rows[$i];
+    
+                            ?>
+                                <tr class="table-row">
+                                    <?php 
+                                        foreach ($current_row as $key => $value) {
+                                            ?> 
+                                                <td class="table-data"><?php echo $value ?></td>
+                                            <?php
+                                        }
+                                        ?>
+                                            <td class="table-data">
+                                                <div class="box square transparent-color">
+                                                    <label title="Delete Your Row">
+                                                        <i class="fa fa-times icon-size red-color icon-button"></i>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        <?php
+                                    ?>
+                                </tr>
+                            <?php
+                        }
+                    }
+                ?>
+            </table>
+        </div>
     <?php
 }
 

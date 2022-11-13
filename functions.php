@@ -3,6 +3,9 @@
 // sakura back end plugin
 require_once("sakura-back-end-plugin/sakura-back-end-plugin.php");
 
+// utils
+require_once("inc/season.php");
+
 // checking function
 if (!function_exists('is_plugin_active')) {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -69,15 +72,17 @@ add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 function sakura_theme_register_styles() {
     $version = wp_get_theme()->get("Version");
 
-    // wp_enqueue_style("sakura_theme-style-1", get_template_directory_uri() . "/assets/css/style-1.css", array("sakura_theme-style-2"), $version, "all");
+    // Default styles
     wp_enqueue_style("sakura_theme-style", get_template_directory_uri() . "/style.css", array(), $version, "all");
     wp_enqueue_style("sakura_theme-style-limelight", get_template_directory_uri() . "/assets/css/style-limelight.css", array("sakura_theme-bootstrap-min-style"), $version, "all");
-    // wp_enqueue_style("sakura_theme-christmas-style", get_template_directory_uri() . "/assets/css/christmas-style.css", array("sakura_theme-style-limelight"), $version, "all");
     wp_enqueue_style("sakura_theme-bootstrap-min-style", get_template_directory_uri() . "/assets/css/bootstrap.min.css", array(), "4.1.0", "all");
     wp_enqueue_style("sakura_theme-responsive-style", get_template_directory_uri() . "/assets/css/responsive.css", array("sakura_theme-bootstrap-min-style"), $version, "all");
     wp_enqueue_style("sakura_theme-jquery-mCustomScrollbar-min-style", get_template_directory_uri() . "/assets/css/jquery.mCustomScrollbar.min.css", array(), $version, "all");
     wp_enqueue_style("sakura_theme-font-awesome-style", "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", array(), "4.0.3", "all");
     wp_enqueue_style("sakura_theme-jquery-fancybox-min-style", "https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css", array(), "2.1.5", "screen");
+    
+    // Christmas styles
+    wp_enqueue_style("sakura_theme-christmas-style", get_template_directory_uri() . "/assets/css/christmas-style.css", array("sakura_theme-style-limelight"), $version, "all");
 }
 
 add_action("wp_enqueue_scripts", "sakura_theme_register_styles");

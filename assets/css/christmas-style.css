@@ -19,6 +19,19 @@ body {
   background: none;
 }
 
-.footer {
-  background: linear-gradient(#123, #111);
+.christmas-footer {
+  background: red;
+  border-radius: 15px;
+}
+
+.christmas-content-footer {
+  height: 100%;
+}
+
+.christmas-footer img {
+  padding: 15px;
+}
+
+hr {
+  background-color: #ffffff;
 }

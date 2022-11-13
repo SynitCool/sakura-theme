@@ -1,5 +1,7 @@
 <?php
 
+require_once("utils.php");
+
 function get_databases() {
     global $wpdb;
 
@@ -39,6 +41,28 @@ function get_column_table($database_name, $table_name) {
     }
 
     return $columns;
+}
+
+function get_column_type_table($database_name, $table_name) {
+    global $wpdb;
+
+    $query = $wpdb->get_results("DESCRIBE $database_name.$table_name");
+
+    $convert_type = array("bigint(20)" => "number", "date" => "date", "longtext" => "text");
+
+    $column_types = array();
+    for ($i = 0; $i < count($query); ++$i) {
+        $current_field = $query[$i];
+
+        $column = $current_field->Field;
+        $type = $current_field->Type;
+
+        $type = $convert_type[$type];
+
+        $column_types[$column] = $type;
+    }
+
+    return $column_types;
 }
 
 function get_row_table($database_name, $table_name, $format = "column", $limit = 5) {
@@ -82,7 +106,29 @@ function get_row_table($database_name, $table_name, $format = "column", $limit =
 
 }
 
+function add_all_row($database_name, $table_name, $row_values) {
+    global $wpdb;
+
+    $query = "INSERT INTO $database_name.$table_name VALUES";
+    $query .= " (";
+    
+    for ($i = 0; $i < count($row_values); ++$i) {
+        if ($i == count($row_values) - 1) {
+            $query .= "'$row_values[$i]'";
+            continue;
+        }
+        
+        $query .= "'$row_values[$i]'".", ";
+    }
+
+    $query .= ");";
+
+    $result_query = $wpdb->get_results($query);
+}
+
 function create_database($database_name) {
+    $database_name = fix_name_convention($database_name);
+
     global $wpdb;
 
     $wpdb->get_results("CREATE DATABASE $database_name");

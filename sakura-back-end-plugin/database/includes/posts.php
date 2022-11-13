@@ -1,12 +1,14 @@
 <?php
 
+require_once("utils.php");
+
 function list_post_number($ind) {
     $posts = array();
 
     foreach ($_POST as $key => $value) {
         if (str_contains( $key, $ind )) {
             $number = array_slice(str_split($key), -1, 1)[0];
-            $posts[$number] = $value;
+            $posts[$number] = fix_name_convention($value);
         }
     }
 
