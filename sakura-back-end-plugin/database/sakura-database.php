@@ -10,25 +10,6 @@ require_once("sakura-database-cookie.php");
 require_once("sakura-database-post.php");
 
 function new_menu_page() {
-    // global $wpdb;
-
-    // $query = $wpdb->get_results("DESCRIBE ".$_COOKIE["selected_database"].".".$_COOKIE["selected_table"]);
-
-    ?>
-        <p>
-            <?php
-                echo '<pre>'; print_r($_COOKIE); echo '</pre>';
-                echo "\n";
-            ?>
-        </p>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-    <?php
-
-
     ?>
         <div class="main">
             <div class="flex-col">
