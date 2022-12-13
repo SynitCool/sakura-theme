@@ -81,11 +81,25 @@ function sakura_theme_register_styles() {
     wp_enqueue_style("sakura_theme-font-awesome-style", "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", array(), "4.0.3", "all");
     wp_enqueue_style("sakura_theme-jquery-fancybox-min-style", "https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css", array(), "2.1.5", "screen");
     
-    // Christmas styles
-    wp_enqueue_style("sakura_theme-christmas-style", get_template_directory_uri() . "/assets/css/christmas-style.css", array("sakura_theme-style-limelight"), $version, "all");
+    if (current_season() == "christmas") {
+        // Christmas styles
+        wp_enqueue_style("sakura_theme-christmas-style", get_template_directory_uri() . "/assets/css/christmas-style.css", array("sakura_theme-style-limelight"), $version, "all");
+        wp_enqueue_style("sakura_theme-christmas-responsive-style", get_template_directory_uri() . "/assets/css/christmas-responsive.css", array("sakura_theme-responsive-style"), $version, "all");
+    }
 }
 
 add_action("wp_enqueue_scripts", "sakura_theme_register_styles");
+
+function sakura_theme_register_effects_styles() {
+    $version = wp_get_theme()->get("Version");
+
+    if (current_season() == "christmas") {
+        wp_enqueue_style("sakura_theme-snow-style", get_template_directory_uri() . "/assets/css/snow-styles.css", array(), $version, "all");
+    }
+}
+
+add_action("wp_enqueue_scripts", "sakura_theme_register_effects_styles");
+
 
 function sakura_theme_register_scripts() {
     $version = wp_get_theme()->get("Version");

@@ -1,8 +1,9 @@
 <?php
 
 require_once("inc/season.php");
+require_once("inc/options.php");
 
-if (current_season() == "default") {
+if (current_season() == "christmas") {
   ?>
         <footer class="text-center christmas-footer text-lg-start text-light">
           <div class="col">
@@ -36,7 +37,23 @@ if (current_season() == "default") {
                 <p><i class="fa fa-phone me-3"></i> 0812-9188-8474</p>
                 <p><i class="fa fa-print me-3"></i> 0812-9188-8474</p>
               </div>
+              <div class="container-audio">
+              <p>We Wish You A Merry Christmas!</p>
+              <!-- sound -->
+              <?php
+                if (get_sound_option() == "on") {
+                  ?>
+                    <audio controls loop autoplay>
+                      <source src="https://firebasestorage.googleapis.com/v0/b/part-of-images.appspot.com/o/christmas-music%2Fwe-wish-you-a-merry-christmas-backsound.mp3?alt=media" type="audio/mpeg">
+                      Your browser dose not Support the audio Tag
+                    </audio>
+                  <?php
+                }
+              ?>
+              <!-- endsound -->
             </div>
+            </div>
+           
             <div class="col p-4 text-center">
               © 2022 Copyright
               <p class="fw-bold">SMAN 1 CIKARANG UTARA</p>
@@ -54,7 +71,7 @@ if (current_season() == "default") {
   <?php
 }
 
-if (current_season() == "christmas") {
+if (current_season() == "default") {
     ?>
           <!--  footer -->
           <!-- Footer -->
