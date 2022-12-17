@@ -1,5 +1,5 @@
 <?php
-require_once("options.php");
+require_once("sakura-options.php");
 
 
 function current_season() {
