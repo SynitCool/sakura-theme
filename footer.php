@@ -1,7 +1,7 @@
 <?php
 
 require_once("inc/season.php");
-require_once("inc/options.php");
+require_once("inc/sakura-options.php");
 
 if (current_season() == "christmas") {
   ?>
