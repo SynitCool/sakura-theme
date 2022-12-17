@@ -73,7 +73,7 @@
                            <?php sakura_theme_get_header_logo(); ?>
                         </div>
                      </div>
-                     <div class="col my-auto">
+                     <div class="col-md-9">
                         <nav class="navigation navbar navbar-expand-md navbar-dark">
                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                               <span class="navbar-toggler-icon"></span>
