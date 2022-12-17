@@ -1,5 +1,7 @@
 <?php
 
+require_once("season.php");
+
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
@@ -58,6 +60,10 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			$classes[] = 'menu-item-' . $item->ID;
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+			
+			if (current_season() == "christmas") {
+				$class_names = $class_names . ' my-auto';
+			}
 
 			if ( $args->has_children ) {
 				$class_names .= ' dropdown';
@@ -86,7 +92,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$atts['class']       = 'dropdown-toggle nav-link';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '';
-                $atts['class']       = 'nav-link';
+				$atts['class']       = 'nav-link';
 			}
 
 			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );

@@ -68,12 +68,12 @@
                <!-- header -->
                <header>
                   <div class="row header-container">
-                     <div class="col">
+                     <div class="col my-auto">
                         <div class="logo">
                            <?php sakura_theme_get_header_logo(); ?>
                         </div>
                      </div>
-                     <div class="col-md-5">
+                     <div class="col my-auto">
                         <nav class="navigation navbar navbar-expand-md navbar-dark">
                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                               <span class="navbar-toggler-icon"></span>

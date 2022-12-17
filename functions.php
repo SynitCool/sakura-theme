@@ -11,11 +11,19 @@ if (!function_exists('is_plugin_active')) {
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 
+function sakura_theme_backend_setup() {
+    // Register a new setting for "sakura_admin" page.
+    register_setting( 'sakura_admin', 'sakura_backend_option' );
+}
+
 function sakura_theme_init() {
     // checking elementor installed
     if (is_plugin_active( "elementor/elementor.php" )) {
 		require_once("elementor-widgets/widgets.php");
 	}
+
+    // setup
+    sakura_theme_backend_setup()
 }
 
 sakura_theme_init();
