@@ -23,7 +23,7 @@ function sakura_theme_init() {
 	}
 
     // setup
-    sakura_theme_backend_setup()
+    sakura_theme_backend_setup();
 }
 
 sakura_theme_init();
