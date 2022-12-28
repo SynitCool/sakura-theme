@@ -989,7 +989,7 @@ ul.social_icon li a {
   font-size: 20px;
   border-radius: 30px;
   margin: 0 3px;
-  color: #202020;
+  color: #202020 !important;
   background: #fff;
   width: 35px;
   height: 35px;

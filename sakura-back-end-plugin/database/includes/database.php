@@ -2,7 +2,7 @@
 
 require_once("utils.php");
 
-function get_databases() {
+function get_databases($system = false) {
     global $wpdb;
 
     $query = $wpdb->get_results("SHOW DATABASES");
@@ -12,10 +12,25 @@ function get_databases() {
         array_push($databases, $db_class->Database);
     }
 
+    if ($system == false) {
+        $databases = get_sarthem_databases($databases);
+    }
+
     return $databases;
 }
 
-function get_tables($database_name) {
+function get_sarthem_databases($database_names) {
+    $sarthem_databases = array();
+    for ($i = 0; $i < count($database_names); ++$i) {
+        if (str_contains( $database_names[$i], "sarthem" )) {
+            array_push($sarthem_databases, $database_names[$i]);
+        }
+    }
+
+    return $sarthem_databases;
+}
+
+function get_tables($database_name, $system = false) {
     global $wpdb;
 
     $query = $wpdb->get_results("SHOW tables FROM $database_name");
@@ -27,7 +42,22 @@ function get_tables($database_name) {
         array_push($tables, $table_array["Tables_in_$database_name"]);
     }
 
+    if ($system == false) {
+        $tables = get_sarthem_tables($tables);
+    }
+
     return $tables;
+}
+
+function get_sarthem_tables($table_names) {
+    $sarthem_tables = array();
+    for ($i = 0; $i < count($table_names); ++$i) {
+        if (str_contains( $table_names[$i], "sarthem" )) {
+            array_push($sarthem_tables, $table_names[$i]);
+        }
+    }
+
+    return $sarthem_tables;
 }
 
 function get_column_table($database_name, $table_name) {
@@ -134,7 +164,21 @@ function create_database($database_name) {
     $wpdb->get_results("CREATE DATABASE $database_name");
 }
 
+function create_sarthem_database($database_name) {
+    $database_name = fix_name_convention($database_name);
+    $sarthem_database = "sarthem_";
+
+    global $wpdb;
+
+    $database_name = $sarthem_database . $database_name;
+
+    $wpdb->get_results("CREATE DATABASE $database_name");
+}
+
+
 function create_table($database_name, $table_name, $column_types) {
+    $table_name = fix_name_convention($table_name);
+
     global $wpdb;
 
     $convert_types = array("number" => "BIGINT", "text" => "LONGTEXT", "date" => "DATE");
@@ -154,6 +198,34 @@ function create_table($database_name, $table_name, $column_types) {
 
     $wpdb->get_results($query);
 }
+
+function create_sarthem_table($database_name, $table_name, $column_types) {
+    $table_name = fix_name_convention($table_name);
+
+    global $wpdb;
+
+    $convert_types = array("number" => "BIGINT", "text" => "LONGTEXT", "date" => "DATE");
+
+    $column_types_query = "(";
+    foreach($column_types as $column => $type) {
+        if (array_key_last($column_types) == $column) {
+            $column_types_query .= "$column $convert_types[$type]";
+            continue;
+        }
+
+        $column_types_query .= "$column $convert_types[$type],";
+    }
+    $column_types_query .= ");";
+
+    $sarthem_table = "sarthem_";
+
+    $table_name = $sarthem_table . $table_name;
+
+    $query = "CREATE TABLE $database_name.$table_name " . $column_types_query;
+
+    $wpdb->get_results($query);
+}
+
 
 function delete_table($database_name, $table_name) {
     global $wpdb;

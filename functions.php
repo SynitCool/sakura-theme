@@ -121,6 +121,36 @@ function sakura_theme_register_scripts() {
 
 add_action("wp_enqueue_scripts", "sakura_theme_register_scripts");
 
+function sakura_theme_custom_title() {
+    if (is_404()) {
+        $profile_database = SarthemIncludes\get_option_profile_database();
+        $profile_table = SarthemIncludes\get_option_profile_table();
+
+        $url      = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $url_path = parse_url( $url, PHP_URL_PATH );
+        $slug = pathinfo( $url_path, PATHINFO_BASENAME );
+
+        $profile_rows = SarthemIncludes\get_row_by_column_row($profile_database, $profile_table, "slug", $slug);
+        $profile_exist = True;
+        if (empty($profile_rows)) {
+            $profile_exist = False;
+
+            return;
+        } else {
+            $profile = $profile_rows[0];
+     
+            $profile_name = $profile['name'];
+            $profile_slug = $profile['slug'];
+
+            return "$profile_name (@$profile_slug)";
+        }
+    }
+
+    return;
+}
+
+add_filter('pre_get_document_title', 'sakura_theme_custom_title');
+
 /**
  * Load custom nav walker
  */
@@ -135,4 +165,14 @@ require get_template_directory() . '/inc/extras.php';
  * Load Social Navition
  */
 require get_template_directory() . '/inc/socialnav.php';
+
+/**
+ * Load option for sarthem
+ */
+require get_template_directory() . '/inc/get-option.php';
+
+/**
+ * Load database
+ */
+require get_template_directory() . '/inc/database.php';
 ?>

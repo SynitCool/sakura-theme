@@ -11,22 +11,18 @@ if (isset($_POST["add-new-table"])) {
 
     $merge_column_types = merge_by_key($columns, $types);
 
-    create_table($_COOKIE["selected_database"], $table_name, $merge_column_types);
+    create_sarthem_table($_COOKIE["selected_database"], $table_name, $merge_column_types);
 }
 
 if (isset($_POST["add-new-row"])) {
-    $values = list_post_number("column");
+    $values = list_post_number("column", $fix_name=False);
 
     add_all_row($_COOKIE["selected_database"], $_COOKIE["selected_table"], $values);
 }
 
 // Handle button and text post
 if (isset($_POST["add-database"]) && isset($_POST["database-name"])){
-    create_database($_POST["database-name"]);
-}
-
-if (isset($_POST["delete-database"]) && isset($_POST["database-name"])){
-    delete_database($_POST["database-name"]);
+    create_sarthem_database($_POST["database-name"]);
 }
 
 if (isset($_POST["show-table"]) && isset($_POST["database-name"])) {

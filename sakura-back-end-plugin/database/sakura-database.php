@@ -417,7 +417,7 @@ function admin_content_database() {
 
 function admin_content_column_row() {
     $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
-    $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row");
+    $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row", $limit=10);
 
     ?>
         <div class="scroll-table">

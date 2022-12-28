@@ -8,7 +8,8 @@ body {
 
 .main {
   padding: 32px;
-  background: #fff;
+  background: #ffffff;
+  height: 120vh;
 }
 
 .flex-row {

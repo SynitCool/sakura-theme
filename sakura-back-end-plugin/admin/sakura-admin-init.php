@@ -9,6 +9,56 @@ function init() {
     register_setting( 'sakura_admin', 'sakura_backend_option' );
 
     theme_support_section();
+    profile_feature_section();
+}
+
+function profile_feature_section() {
+    add_settings_section( 
+        'profile_section', 
+        __('Profile Feature', 'sakura_backend'), 
+        'profile_section', 
+        'sakura_admin' 
+    );
+
+    add_settings_field( 
+        'profile_feature_field', 
+        __('Profile Feature', 'sakura_backend'), 
+        'profile_feature_field', 
+        'sakura_admin', 
+        'profile_section',
+        array(
+            'label_for' => 'profile_feature',
+            'custom_data' => 'profile_feature'
+        )
+    );
+
+    if (get_option_profile_feature() == "on") {
+        add_settings_field( 
+            'profile_database_field', 
+            __('Profile Database', 'sakura_backend'), 
+            'profile_database_field', 
+            'sakura_admin', 
+            'profile_section',
+            array(
+                'label_for' => 'profile_database',
+                'custom_data' => 'profile_database'
+            )
+        );
+    }
+
+    if ((get_option_profile_feature() == "on") && (get_option_profile_database() != "no-selected")) {
+        add_settings_field( 
+            'profile_table_field', 
+            __('Profile Table', 'sakura_backend'), 
+            'profile_table_field', 
+            'sakura_admin', 
+            'profile_section',
+            array(
+                'label_for' => 'profile_table',
+                'custom_data' => 'profile_table'
+            )
+        );
+    }
 }
 
 function theme_support_section() {
@@ -56,6 +106,4 @@ function theme_support_section() {
             'custom_data' => 'sound'
         )
     );
-
-    
 }
