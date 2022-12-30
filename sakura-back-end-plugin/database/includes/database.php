@@ -136,6 +136,112 @@ function get_row_table($database_name, $table_name, $format = "column", $limit =
 
 }
 
+// TEMPORARY
+function get_sort_row_table($database_name, $table_name, $column, $format = "column", $limit = 5) {
+    global $wpdb;
+
+    $query = $wpdb->get_results("SELECT * FROM $database_name.$table_name ORDER BY $column LIMIT $limit");
+
+    if ($format == "column") {
+        $columns = get_column_table($database_name,$table_name);
+        $column_rows = array();
+    
+        foreach ($columns as $column) {
+            $column_rows[$column] = array();
+        }
+    
+        for ($i = 0; $i < count($query); ++$i) {
+            $current_row = $query[$i];
+    
+            $row_array = get_object_vars($current_row);
+    
+            foreach($row_array as $key=>$value) {
+                array_push($column_rows[$key], $value);
+            }
+        }
+    
+        return $column_rows;
+    }
+
+    if ($format == "row") {
+        $column_row_array = array();
+        for ($i = 0; $i < count($query); ++$i) {
+            $current_row = $query[$i];
+    
+            $row_array = get_object_vars($current_row);
+
+            array_push($column_row_array, $row_array);
+        }
+
+        return $column_row_array;
+    }
+
+    return $query;
+}
+
+function get_sort_sequence_row_table($database_name, $table_name, $sort_sequences, $format = "column", $limit = 5) {
+    global $wpdb;
+
+    $query = "SELECT * FROM $database_name.$table_name";
+
+
+    if (array_key_exists("search", $sort_sequences)) {
+        $search = $sort_sequences["search"];
+
+        $search_column = $search[0];
+        $search_value = $search[1];
+
+        $query .= " WHERE $search_column = '$search_value'";
+    }
+
+    if (array_key_exists("sort", $sort_sequences)) {
+        $sort_value = $sort_sequences["sort"];
+        $query .= " ORDER BY $sort_value";
+    }
+
+    $query .= " LIMIT $limit;";
+
+    $query_results = $wpdb->get_results($query);
+
+    if ($format == "column") {
+        $columns = get_column_table($database_name,$table_name);
+        $column_rows = array();
+    
+        foreach ($columns as $column) {
+            $column_rows[$column] = array();
+        }
+    
+        for ($i = 0; $i < count($query_results); ++$i) {
+            $current_row = $query_results[$i];
+    
+            $row_array = get_object_vars($current_row);
+    
+            foreach($row_array as $key=>$value) {
+                array_push($column_rows[$key], $value);
+            }
+        }
+    
+        return $column_rows;
+    }
+
+    if ($format == "row") {
+        $column_row_array = array();
+        for ($i = 0; $i < count($query_results); ++$i) {
+            $current_row = $query_results[$i];
+    
+            $row_array = get_object_vars($current_row);
+
+            array_push($column_row_array, $row_array);
+        }
+
+        return $column_row_array;
+    }
+
+    return $query_results;
+}
+
+
+
 function add_all_row($database_name, $table_name, $row_values) {
     global $wpdb;
 

@@ -40,3 +40,40 @@ if (isset($_POST["new-table-length"]) && isset($_POST["update-new-table-length"]
     setcookie("new_table_length", $_POST["new-table-length"], time() + (86400 * 30), "/");
     header("Refresh:0");
 }
+
+// Handle row columns sort
+if (isset($_POST["sort"])) {
+    // sort
+    $sort_column = $_POST["sort-by"];
+    
+    // search
+    $search_column = $_POST["search-by"];
+    $search_value = $_POST["search-value"];
+    $search_value = trim($search_value);
+
+    
+    // decode
+    $sort_sequences = $_COOKIE["sort_sequences"];
+    $sort_sequences = json_decode($sort_sequences);
+
+    // // adding content
+    if ($sort_column != "no-sort") {
+        $sort_sequences["sort"] = $sort_column;
+    } 
+
+    if (($search_column != "no-search") && ($search_value != "")) {
+        $sort_sequences["search"] = array($search_column, $search_value);
+    }
+
+    if ($sort_sequences == null) {
+        $sort_sequences = array();
+    }
+
+    // encode
+    $sort_sequences = json_encode($sort_sequences);
+
+
+    // set cookie
+    setcookie("sort_sequences", $sort_sequences, time() + (86400 * 30), "/");
+    header("Refresh:0");
+}

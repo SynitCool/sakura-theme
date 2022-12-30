@@ -110,8 +110,128 @@ function admin_content() {
     ?>
         <div class="admin-content">
             <hr />
-            <div class="flex-col">
-                <?php admin_content_title() ?>
+            <?php
+                if ((current_state() == "column-row") && ($_COOKIE["sort_mode"] == "on")) {
+                    $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
+
+                    $sort_sequences = $_COOKIE["sort_sequences"];
+                    $sort_sequences = str_replace("\\", "", $sort_sequences);
+                    $sort_sequences = json_decode($sort_sequences, true);
+                    ?>
+                        <form method="post">
+                            <div class="flex-col">
+                                <div class="flex-row">
+                                    <div class="flex-col">
+                                        <h3>Sort Option</h3>
+                                    </div>
+                                    <div class="flex-col item-center flex-content-right">
+                                        <input type="submit" value="Sort" name="sort" />
+                                    </div>
+                                </div>
+                                <div class="flex-row flex-gap">
+                                    <div class="flex-col">
+                                        <p>Sort By</p>
+                                        <select name="sort-by">
+                                            <option value="no-sort">
+                                                no-sort
+                                            </option>
+                                            <?php
+                                                if (array_key_exists("sort", $sort_sequences)) {
+                                                    foreach ($columns as $column) {
+                                                        if ($sort_sequences["sort"] == $column) {
+                                                            ?> 
+                                                                <option value=<?php echo $column ?> selected>
+                                                                    <?php echo $column?>
+                                                                </option> 
+                                                            <?php
+                                                        } else {
+                                                            ?> 
+                                                                <option value=<?php echo $column ?>>
+                                                                    <?php echo $column?>
+                                                                </option> 
+                                                            <?php
+                                                        }
+                                                    }
+                                                } else {
+                                                    foreach ($columns as $column) {
+                                                        ?> 
+                                                            <option value=<?php echo $column ?>>
+                                                                <?php echo $column?>
+                                                            </option> 
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="flex-col">
+                                        <p>Search By</p>
+                                        <select name="search-by">
+                                            <option value="no-search">
+                                                no-search
+                                            </option> 
+                                            <?php
+                                                if (array_key_exists("search", $sort_sequences)) {
+                                                    foreach ($columns as $column) {
+                                                        if ($sort_sequences["search"][0] == $column) {
+                                                            ?> 
+                                                                <option value=<?php echo $column ?> selected>
+                                                                    <?php echo $column?>
+                                                                </option> 
+                                                            <?php
+                                                        } else {
+                                                            ?> 
+                                                                <option value=<?php echo $column ?>>
+                                                                    <?php echo $column?>
+                                                                </option> 
+                                                            <?php
+                                                        }
+                                                    }
+                                                } else {
+                                                    foreach ($columns as $column) {
+                                                        ?> 
+                                                            <option value=<?php echo $column ?>>
+                                                                <?php echo $column?>
+                                                            </option> 
+                                                        <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                        <br/>
+                                        <?php
+                                            if (array_key_exists("search", $sort_sequences)) {
+                                                ?> 
+                                                    <input type="text" name="search-value" value=<?php echo $sort_sequences["search"][1] ?> />
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <input type="text" name="search-value"/>
+                                                <?php
+                                            }
+                                        ?>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <hr/>
+                    <?php
+                }
+            ?>
+            <div class="flex-row">
+                <div class="flex-col">
+                    <?php admin_content_title() ?>
+                </div>
+                <div class="flex-col item-center flex-content-right">
+                    <div class="box rounded m-top white-color-item">
+                        <span>
+                            <label title="Open Sort Option" onClick="activateSortMode('<?php echo $_COOKIE["sort_mode"] ?>')">
+                                Sort
+                            </label>
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="flex-col padding-small">
                 <div class="flex-col">
@@ -416,84 +536,119 @@ function admin_content_database() {
 }
 
 function admin_content_column_row() {
+    $current_limit = $_COOKIE["row_limit"];
     $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
-    $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row", $limit=10);
+    $new_load_limit = $current_limit + 10;
+
+    // decode
+    $sort_sequences = $_COOKIE["sort_sequences"];
+    $sort_sequences = str_replace("\\", "", $sort_sequences);
+    $sort_sequences = json_decode($sort_sequences, true);
+
+    if (empty($sort_sequences)) {
+        $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row", $limit=$current_limit);
+    } else {
+        $rows = get_sort_sequence_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $sort_sequences, $format = "row", $limit=$current_limit);
+    }
+
 
     ?>
         <div class="scroll-table">
             <table class="column-row">
-                <tr class="table-row">
-                    <?php 
-                        if ($_COOKIE["edit_mode"] == "off") {
-                            foreach ($columns as $column) {
+                    <tr class="table-row">
+                        <?php 
+                            if ($_COOKIE["edit_mode"] == "off") {
+                                foreach ($columns as $column) {
+                                    ?>
+                                        <th class="table-head"><?php echo $column ?></th>
+                                    <?php
+                                }
+                            }
+    
+                            if ($_COOKIE["edit_mode"] == "on") {
+                                foreach ($columns as $column) {
+                                    ?>
+                                        <th class="table-head"><?php echo $column ?></th>
+                                    <?php
+                                }
                                 ?>
-                                    <th class="table-head"><?php echo $column ?></th>
+                                    <th class="table-head">Edit</th>
+                                <?php
+                            }
+                        ?>
+                    </tr>
+                    <?php
+                        if ($_COOKIE["edit_mode"] == "off") {
+                            for($i = 0; $i < count($rows); ++$i) {
+                                $current_row = $rows[$i];
+        
+                                ?>
+                                    <tr class="table-row">
+                                        <?php 
+                                            foreach ($current_row as $key => $value) {
+                                                ?> 
+                                                    <td class="table-data"><?php echo $value ?></td>
+                                                <?php
+                                            }
+                                        ?>
+                                    </tr>
                                 <?php
                             }
                         }
-
+    
                         if ($_COOKIE["edit_mode"] == "on") {
-                            foreach ($columns as $column) {
+                            for($i = 0; $i < count($rows); ++$i) {
+                                $current_row = $rows[$i];
+                                $column_row = "";
+        
                                 ?>
-                                    <th class="table-head"><?php echo $column ?></th>
+                                    <tr class="table-row">
+                                        <?php 
+                                            foreach ($current_row as $key => $value) {
+                                                $column_row .= "$key=$value|";
+    
+                                                ?> 
+                                                    <td class="table-data"><?php echo $value ?></td>
+                                                <?php
+                                            }
+                                            ?>
+                                                <td class="table-data">
+                                                    <div class="box square transparent-color">
+                                                        <label title="Delete Your Row" onClick="deleteRowButton('<?php echo $column_row?>')">
+                                                            <i class="fa fa-times icon-size red-color icon-button"></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            <?php
+                                        ?>
+                                    </tr>
                                 <?php
                             }
-                            ?>
-                                <th class="table-head">Edit</th>
-                            <?php
                         }
                     ?>
-                </tr>
+            </table>
+            <hr/>
+            <div class="flex-col flex-content-center">
                 <?php
-                    if ($_COOKIE["edit_mode"] == "off") {
-                        for($i = 0; $i < count($rows); ++$i) {
-                            $current_row = $rows[$i];
-    
-                            ?>
-                                <tr class="table-row">
-                                    <?php 
-                                        foreach ($current_row as $key => $value) {
-                                            ?> 
-                                                <td class="table-data"><?php echo $value ?></td>
-                                            <?php
-                                        }
-                                    ?>
-                                </tr>
-                            <?php
-                        }
-                    }
-
-                    if ($_COOKIE["edit_mode"] == "on") {
-                        for($i = 0; $i < count($rows); ++$i) {
-                            $current_row = $rows[$i];
-                            $column_row = "";
-    
-                            ?>
-                                <tr class="table-row">
-                                    <?php 
-                                        foreach ($current_row as $key => $value) {
-                                            $column_row .= "$key=$value|";
-
-                                            ?> 
-                                                <td class="table-data"><?php echo $value ?></td>
-                                            <?php
-                                        }
-                                        ?>
-                                            <td class="table-data">
-                                                <div class="box square transparent-color">
-                                                    <label title="Delete Your Row" onClick="deleteRowButton('<?php echo $column_row?>')">
-                                                        <i class="fa fa-times icon-size red-color icon-button"></i>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                        <?php
-                                    ?>
-                                </tr>
-                            <?php
-                        }
+                    if ($current_limit > 100) {
+                        ?>
+                            <div class="m-top">
+                                <p>Table has more than 100 rows, unable to load more than 100 rows!</p>
+                            </div>
+                        <?php
+                    } else {
+                        ?>
+                            <div class="box rounded m-top white-color-item">
+                                <span>
+                                    <label title="Load More" onClick=<?php echo "loadRowMoreButton($new_load_limit)" ?>>
+                                        Load More
+                                    </label>
+                                </span>
+                            </div>
+                        <?php
                     }
                 ?>
-            </table>
+            </div>
         </div>
     <?php
 }

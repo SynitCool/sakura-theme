@@ -6,6 +6,10 @@ function setTableState(table_name) {
   setState("selected_table", table_name);
 }
 
+function setRowLimitState(new_row_limit) {
+  setState("row_limit", new_row_limit);
+}
+
 function activateEditMode(edit_mode) {
   if (edit_mode == "on") {
     setState("edit_mode", "off");
@@ -13,6 +17,16 @@ function activateEditMode(edit_mode) {
 
   if (edit_mode == "off") {
     setState("edit_mode", "on");
+  }
+}
+
+function activateSortMode(sort_mode) {
+  if (sort_mode == "on") {
+    setState("sort_mode", "off");
+  }
+
+  if (sort_mode == "off") {
+    setState("sort_mode", "on");
   }
 }
 
@@ -65,6 +79,10 @@ function backButton() {
 function refreshButton() {
   setState("selected_database", "no-selected");
   setState("selected_table", "no-selected");
+  setState("edit_mode", "off");
+  setState("sort_mode", "off");
+  setState("sort_sequences", JSON.stringify([]));
+  setState("row_limit", 5);
 }
 
 function currentState() {
@@ -124,4 +142,8 @@ function deleteTableButton(table_name) {
 
 function deleteRowButton(row_values) {
   setTempRowState(row_values);
+}
+
+function loadRowMoreButton(new_row_limit) {
+  setRowLimitState(new_row_limit);
 }

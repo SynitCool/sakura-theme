@@ -30,8 +30,29 @@ body {
   align-items: center;
 }
 
+.rounded {
+  border-radius: 10px;
+  padding: 5px;
+}
+
 .item-center {
   justify-content: center;
+}
+
+.flex-content-center {
+  align-items: center;
+}
+
+.flex-content-right {
+  align-items: flex-end;
+}
+
+.flex-gap {
+  gap: 20px;
+}
+
+.m-top {
+  margin-top: 30px;
 }
 
 .item-right {
@@ -62,6 +83,10 @@ body {
 
 .yellow-color {
   background-color: #e5ff00;
+}
+
+.white-color-item {
+  color: #ffffff;
 }
 
 .icon-button {

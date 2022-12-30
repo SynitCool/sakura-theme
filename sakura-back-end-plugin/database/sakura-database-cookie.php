@@ -28,6 +28,24 @@ if (!isset($_COOKIE["new_table_length"])) {
     header("Refresh:0");
 }
 
+if (!isset($_COOKIE["row_limit"])) {
+    setcookie("row_limit", 5, time() + (86400 * 30), "/");
+    header("Refresh:0");
+}
+
+if (!isset($_COOKIE["sort_mode"])) {
+    setcookie("sort_mode", "off", time() + (86400 * 30), "/");
+    header("Refresh:0");
+}
+
+if (!isset($_COOKIE["sort_sequences"])) {
+    $sequences = array();
+    $sequences = json_encode($sequences);
+
+    setcookie("sort_sequences", $sequences, time() + (86400 * 30), "/");
+    header("Refresh:0");
+}
+
 // offset cookie
 if (isset($_COOKIE["edit_mode"])) { 
     fix_offset_cookie_edit_mode();
