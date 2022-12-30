@@ -4,6 +4,8 @@
     $profile_feature = SarthemIncludes\get_option_profile_feature();
     $profile_database = SarthemIncludes\get_option_profile_database();
     $profile_table = SarthemIncludes\get_option_profile_table();
+
+	$profile_exist = True;
     
     if (($profile_feature == "on") && ($profile_database != "no-selected") && ($profile_table != "no-selected")) {
         $url      = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -11,7 +13,6 @@
         $slug = pathinfo( $url_path, PATHINFO_BASENAME );
 
         $profile_rows = SarthemIncludes\get_row_by_column_row($profile_database, $profile_table, "slug", $slug);
-        $profile_exist = True;
         if (empty($profile_rows)) {
             $profile_exist = False;
         } else {

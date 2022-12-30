@@ -1,6 +1,7 @@
 <?php
 require_once('sakura-admin.php');
 require_once('includes/get-option.php');
+require_once('includes/database.php');
 
 add_action( 'admin_init', 'init' );
 
@@ -47,17 +48,25 @@ function profile_feature_section() {
     }
 
     if ((get_option_profile_feature() == "on") && (get_option_profile_database() != "no-selected")) {
-        add_settings_field( 
-            'profile_table_field', 
-            __('Profile Table', 'sakura_backend'), 
-            'profile_table_field', 
-            'sakura_admin', 
-            'profile_section',
-            array(
-                'label_for' => 'profile_table',
-                'custom_data' => 'profile_table'
-            )
-        );
+        $selected_database = get_option_profile_database();
+        $tables = AdminIncludes\get_tables($selected_database);
+
+        $valid_tables = AdminIncludes\check_table_feature($selected_database, $tables, "profile");
+
+        if (!empty($valid_tables)) {
+            add_settings_field( 
+                'profile_table_field', 
+                __('Profile Table', 'sakura_backend'), 
+                'profile_table_field', 
+                'sakura_admin', 
+                'profile_section',
+                array(
+                    'label_for' => 'profile_table',
+                    'custom_data' => 'profile_table',
+                    'valid_tables' => $valid_tables
+                )
+            );
+        }
     }
 }
 

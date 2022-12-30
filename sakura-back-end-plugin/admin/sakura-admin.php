@@ -1,6 +1,10 @@
 <?php
+require_once('sakura-admin-post.php');
+
 require_once('includes/get-option.php');
+require_once('includes/update-option.php');
 require_once('includes/database.php');
+
 
 function sakura_admin_page() {
     // check user capabilities
@@ -14,6 +18,9 @@ function sakura_admin_page() {
         // add settings saved message with the class of "updated"
         add_settings_error( 'sakura_admin_messages', 'sakura_admin_message', __( 'Settings Saved', 'sakura_backend' ), 'updated' );
     }
+
+    // initialize
+    initialize();
 
     // show error/update messages
     settings_errors( 'sakura_admin_messages' );
@@ -34,10 +41,28 @@ function sakura_admin_page() {
                             submit_button( 'Save Settings' );
                         ?>
                     </form>
+                    <form method="post">
+                        <?php
+                            profile_create_table()
+                        ?>
+                    </form>
                 </div>
             </div>
         </div>
     <?php
+}
+
+function initialize() {
+    // check table in database
+    $selected_database = get_option_profile_database();
+
+    if ($selected_database == "no-selected") return;
+
+    $selected_table = get_option_profile_table();
+
+    $table_exist = AdminIncludes\check_table_exist_database($selected_database, $selected_table);
+
+    if (!$table_exist) AdminIncludes\update_option_profile_table("no-selected");
 }
 
 function theme_section() {
@@ -151,11 +176,7 @@ function profile_database_field($args) {
 
 function profile_table_field($args) {
     $options = get_option( 'sakura_backend_option' );
-    
-    $selected_database = get_option_profile_database();
-    $tables = AdminIncludes\get_tables($selected_database);
-
-    $valid_tables = AdminIncludes\check_table_feature($selected_database, $tables, "profile");
+    $valid_tables = $args['valid_tables']
 
     ?>
         <select 
@@ -187,3 +208,38 @@ function profile_table_field($args) {
         </p>
     <?php
 }
+
+function profile_create_table() {
+    $selected_database = get_option_profile_database();
+
+    if ($selected_database == "no-selected") return;
+
+    $tables = AdminIncludes\get_tables($selected_database);
+
+    $valid_tables = AdminIncludes\check_table_feature($selected_database, $tables, "profile");
+    
+    if (!empty($valid_tables)) return;
+
+    ?>
+        <p>You have no table that compatible for profile feature!</p>
+        <p>Instead create your own table!</p>
+        <table>
+            <tr>
+                <th>
+                    <label>Table Name</label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input maxlength=20 name="table-name" type="text" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="create-table-profile" class="box green-color rounded white-color-item no-border fit-button-size" type="submit" title="Create Table" value="Create Table"/>
+                </td>
+            </tr>
+        </table>
+    <?php
+}
+

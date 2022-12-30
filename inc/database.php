@@ -18,3 +18,11 @@ function get_row_by_column_row($database_name, $table_name, $column, $row) {
 
     return $column_row_array;
 }
+
+function check_table_exist_database($database_name, $table_name) {
+    $tables = get_tables($database_name, $system = true);
+
+    if (in_array($table_name, $tables)) return true;
+
+    return false;
+}

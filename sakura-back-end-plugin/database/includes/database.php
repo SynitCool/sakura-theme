@@ -136,49 +136,6 @@ function get_row_table($database_name, $table_name, $format = "column", $limit =
 
 }
 
-// TEMPORARY
-function get_sort_row_table($database_name, $table_name, $column, $format = "column", $limit = 5) {
-    global $wpdb;
-
-    $query = $wpdb->get_results("SELECT * FROM $database_name.$table_name ORDER BY $column LIMIT $limit");
-
-    if ($format == "column") {
-        $columns = get_column_table($database_name,$table_name);
-        $column_rows = array();
-    
-        foreach ($columns as $column) {
-            $column_rows[$column] = array();
-        }
-    
-        for ($i = 0; $i < count($query); ++$i) {
-            $current_row = $query[$i];
-    
-            $row_array = get_object_vars($current_row);
-    
-            foreach($row_array as $key=>$value) {
-                array_push($column_rows[$key], $value);
-            }
-        }
-    
-        return $column_rows;
-    }
-
-    if ($format == "row") {
-        $column_row_array = array();
-        for ($i = 0; $i < count($query); ++$i) {
-            $current_row = $query[$i];
-    
-            $row_array = get_object_vars($current_row);
-
-            array_push($column_row_array, $row_array);
-        }
-
-        return $column_row_array;
-    }
-
-    return $query;
-}
-
 function get_sort_sequence_row_table($database_name, $table_name, $sort_sequences, $format = "column", $limit = 5) {
     global $wpdb;
 
@@ -240,8 +197,6 @@ function get_sort_sequence_row_table($database_name, $table_name, $sort_sequence
     return $query_results;
 }
 
-
-
 function add_all_row($database_name, $table_name, $row_values) {
     global $wpdb;
 
@@ -280,7 +235,6 @@ function create_sarthem_database($database_name) {
 
     $wpdb->get_results("CREATE DATABASE $database_name");
 }
-
 
 function create_table($database_name, $table_name, $column_types) {
     $table_name = fix_name_convention($table_name);

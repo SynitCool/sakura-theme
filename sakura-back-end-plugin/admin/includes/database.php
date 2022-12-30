@@ -106,3 +106,61 @@ function check_table_feature($database_name, $table_names, $feature) {
 
     return $valid_tables;
 }
+
+function check_table_exist_database($database_name, $table_name) {
+    $tables = get_tables($database_name, $system = true);
+
+    if (in_array($table_name, $tables)) return true;
+
+    return false;
+}
+
+function create_table($database_name, $table_name, $column_types) {
+    $table_name = fix_name_convention($table_name);
+
+    global $wpdb;
+
+    $convert_types = array("number" => "BIGINT", "text" => "LONGTEXT", "date" => "DATE");
+
+    $column_types_query = "(";
+    foreach($column_types as $column => $type) {
+        if (array_key_last($column_types) == $column) {
+            $column_types_query .= "$column $convert_types[$type]";
+            continue;
+        }
+
+        $column_types_query .= "$column $convert_types[$type],";
+    }
+    $column_types_query .= ");";
+
+    $query = "CREATE TABLE $database_name.$table_name " . $column_types_query;
+
+    $wpdb->get_results($query);
+}
+
+function create_sarthem_table($database_name, $table_name, $column_types) {
+    $table_name = fix_name_convention($table_name);
+
+    global $wpdb;
+
+    $convert_types = array("number" => "BIGINT", "text" => "LONGTEXT", "date" => "DATE");
+
+    $column_types_query = "(";
+    foreach($column_types as $column => $type) {
+        if (array_key_last($column_types) == $column) {
+            $column_types_query .= "$column $convert_types[$type]";
+            continue;
+        }
+
+        $column_types_query .= "$column $convert_types[$type],";
+    }
+    $column_types_query .= ");";
+
+    $sarthem_table = "sarthem_";
+
+    $table_name = $sarthem_table . $table_name;
+
+    $query = "CREATE TABLE $database_name.$table_name " . $column_types_query;
+
+    $wpdb->get_results($query);
+}
