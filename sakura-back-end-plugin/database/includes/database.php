@@ -286,6 +286,22 @@ function create_sarthem_table($database_name, $table_name, $column_types) {
     $wpdb->get_results($query);
 }
 
+function check_table_exist_database($database_name, $table_name) {
+    $tables = get_tables($database_name, $system = true);
+
+    if (in_array($table_name, $tables)) return true;
+
+    return false;
+}
+
+function check_column_table_exist($database_name, $table_name, $column_name) {
+    $columns = get_column_table($database_name, $table_name);
+
+    if (in_array($column_name, $columns)) return true;
+
+    return false;
+}
+
 
 function delete_table($database_name, $table_name) {
     global $wpdb;

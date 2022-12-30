@@ -1,5 +1,12 @@
 <?php
 
+function update_sort_sequences_cookie($value) {
+    $value = json_encode($value);
+
+    setcookie("sort_sequences", $value, time() + (86400 * 30), "/");
+    header("Refresh:0");
+}
+
 function fix_offset_cookie_edit_mode() {
     $valid_values = array("on", "off");
     $cookie_value = $_COOKIE["edit_mode"];

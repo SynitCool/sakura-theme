@@ -224,13 +224,19 @@ function admin_content() {
                     <?php admin_content_title() ?>
                 </div>
                 <div class="flex-col item-center flex-content-right">
-                    <div class="box rounded m-top white-color-item">
-                        <span>
-                            <label title="Open Sort Option" onClick="activateSortMode('<?php echo $_COOKIE["sort_mode"] ?>')">
-                                Sort
-                            </label>
-                        </span>
-                    </div>
+                    <?php
+                        if (current_state() == "column-row") {
+                            ?>
+                                <div class="box rounded m-top white-color-item">
+                                    <span>
+                                        <label title="Open Sort Option" onClick="activateSortMode('<?php echo $_COOKIE["sort_mode"] ?>')">
+                                            Sort
+                                        </label>
+                                    </span>
+                                </div>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
             <div class="flex-col padding-small">
@@ -540,6 +546,7 @@ function admin_content_column_row() {
     $columns = get_column_table($_COOKIE["selected_database"], $_COOKIE["selected_table"]);
     $new_load_limit = $current_limit + 10;
 
+    
     // decode
     $sort_sequences = $_COOKIE["sort_sequences"];
     $sort_sequences = str_replace("\\", "", $sort_sequences);
@@ -548,6 +555,24 @@ function admin_content_column_row() {
     if (empty($sort_sequences)) {
         $rows = get_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $format = "row", $limit=$current_limit);
     } else {
+        
+        $sort_columns = array();
+        foreach ($sort_sequences as $sort => $column) {
+            $sort_column = "";
+
+            if ($sort == "sort") $sort_column = $column;
+            if ($sort == "search") $sort_column = $column[0];
+
+            $sort_column_exist = check_column_table_exist($_COOKIE["selected_database"], $_COOKIE["selected_table"], $sort_column);
+
+            if (!$sort_column_exist) {
+                $sort_sequences = array();
+
+                update_sort_sequences_cookie($sort_sequences);
+                break;
+            }
+        }
+        
         $rows = get_sort_sequence_row_table($_COOKIE["selected_database"], $_COOKIE["selected_table"], $sort_sequences, $format = "row", $limit=$current_limit);
     }
 
