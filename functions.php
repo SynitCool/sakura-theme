@@ -12,8 +12,8 @@ if (!function_exists('is_plugin_active')) {
 }
 
 function sakura_theme_backend_setup() {
-    // Register a new setting for "sakura_admin" page.
-    register_setting( 'sakura_admin', 'sakura_backend_option' );
+    // create standard options
+    SarthemIncludes\check_option_standard();
 }
 
 function sakura_theme_init() {
@@ -126,6 +126,13 @@ function sakura_theme_custom_title() {
 
     $profile_database = SarthemIncludes\get_option_profile_database();
     $profile_table = SarthemIncludes\get_option_profile_table();
+
+    if (
+        ($profile_database == "no-selected") || 
+		($profile_table == "no-selected") || 
+		($profile_database == false) || 
+		($profile_table == false)) return;
+
 
 
     if (!SarthemIncludes\check_table_exist_database($profile_database, $profile_table)) return;

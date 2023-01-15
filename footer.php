@@ -41,7 +41,7 @@ if (current_season() == "christmas") {
               <p>We Wish You A Merry Christmas!</p>
               <!-- sound -->
               <?php
-                if (get_sound_option() == "on") {
+                if (SarthemIncludes\get_sound_option() == "on") {
                   ?>
                     <audio controls loop autoplay>
                       <source src="https://firebasestorage.googleapis.com/v0/b/part-of-images.appspot.com/o/christmas-music%2Fwe-wish-you-a-merry-christmas-backsound.mp3?alt=media" type="audio/mpeg">

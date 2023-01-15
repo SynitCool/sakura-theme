@@ -11,7 +11,7 @@ require_once("sakura-database-post.php");
 
 function new_menu_page() {
     ?>
-        <div class="main">
+        <div class="database-main">
             <div class="flex-col">
                 <?php admin_menu_bar() ?>
                 <?php admin_content() ?>

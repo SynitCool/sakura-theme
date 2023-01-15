@@ -47,7 +47,12 @@ function profile_feature_section() {
         );
     }
 
-    if ((get_option_profile_feature() == "on") && (get_option_profile_database() != "no-selected")) {
+    
+    # ERROR
+    if (
+        (get_option_profile_feature() == "on") &&
+        (!in_array(get_option_profile_database(), array("no-selected", false)))) {
+            
         $selected_database = get_option_profile_database();
         $tables = AdminIncludes\get_tables($selected_database);
 

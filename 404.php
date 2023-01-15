@@ -7,7 +7,12 @@
 
 	$profile_exist = True;
     
-    if (($profile_feature == "on") && ($profile_database != "no-selected") && ($profile_table != "no-selected")) {
+    if (
+		($profile_feature == "on") && 
+		($profile_database != "no-selected") && 
+		($profile_table != "no-selected") && 
+		($profile_database != false) && 
+		($profile_table != false) ) {
         $url      = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $url_path = parse_url( $url, PHP_URL_PATH );
         $slug = pathinfo( $url_path, PATHINFO_BASENAME );
@@ -32,7 +37,13 @@
 ?>
 
 <?php
-    if (($profile_exist) && ($profile_feature == "on") && ($profile_database != "no-selected") && ($profile_table != "no-selected")) {
+    if (
+		($profile_exist) && 
+		($profile_feature == "on") && 
+		($profile_database != "no-selected") && 
+		($profile_table != "no-selected") && 
+		($profile_database != false) && 
+		($profile_table != false) ) {
         ?>
             <div class="container">
 				<div class="d-flex flex-column text-center">
