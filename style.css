@@ -1,0 +1,225 @@
+/*
+    Theme Name: Sakura Theme
+    Text Domain: sakura-theme
+    Version: 1.0
+    Description: wordpress theme that developed for sakura
+    Tags: wordpress, theme, sakura-theme
+    Author: Synit
+    Author URI: https://www.instagram.com/synitiscool
+    License: MIT License
+    License URI: https://github.com/SynitCool/sakura-theme/blob/master/LICENSE
+
+    Sakura Theme is distributed under the terms of the MIT License.
+*/
+
+/* Extra */
+
+.no-found-post-text {
+	text-align: center;
+	margin: 100px;
+}
+
+.wp-block-search {
+	margin: 50px;
+	margin-bottom: 100px;
+}
+
+.wp-block-search label {
+	text-align: center;
+}
+
+.wp-block-search button {
+	padding: 10px;
+	border-radius: 10px;
+	background: #35bff8;
+	color: white;
+}
+
+.wp-block-post-template {
+	padding: 50px;
+}
+
+.wp-block-post-template li {
+	background: #FFE7A0;
+	border-radius: 20px;
+	margin: 20px;
+	padding: 20px;
+}
+
+.wp-block-post-title {
+	font-weight: bold;
+}
+
+.searchform #s {
+	width: 80%;
+	text-align: center;
+}
+
+.searchform {
+	text-align: center;
+}
+
+.posts-container {
+	text-align: center;
+	background: #35bff8;
+	padding: 10px;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.posts-container li {
+	padding: 10px;
+	border-radius: 10px;
+	cursor: pointer;
+	background: #FFE7A0;
+	margin: 20px;
+}
+
+.posts-container a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+
+.has-big-line-height {
+	line-height: 70px;
+}
+
+.button-query a {
+	background-color: white;
+	border: 2px solid black;
+	color: green;
+	padding: 5px 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.button-query span {
+	background-color: white;
+	border: 2px solid black;
+	color: green;
+	padding: 5px 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+/* Extra */
+
+.site-navbar {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* 404 PAGE */
+
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.error-actions {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.error-actions .btn {
+  margin-right: 10px;
+}
+
+/* FOOTER */
+
+.social_icon span {
+  display: none;
+}
+
+.social_icon li a[href*="instagram.com"] .fa:before,
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+.social_icon li a[href*="twitter.com"] .fa:before,
+.fa-twitter:before {
+  content: "\f099";
+}
+
+.social_icon li a[href*="facebook.com"] .fa:before,
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+.social_icon li a[href*="github.com"] .fa:before,
+.fa-github:before {
+  content: "\f09b";
+}
+
+.social_icon li a[href*="/feed"] .fa:before,
+.fa-rss:before {
+  content: "\f09e";
+}
+
+.social_icon li a[href*="pinterest.com"] .fa:before,
+.fa-pinterest:before {
+  content: "\f0d2";
+}
+
+.social_icon li a[href*="plus.google.com"] .fa:before,
+.fa-google-plus:before {
+  content: "\f0d5";
+}
+
+.social_icon li a[href*="linkedin.com"] .fa:before,
+.fa-linkedin:before {
+  content: "\f0e1";
+}
+
+.social_icon li a[href*="youtube.com"] .fa:before,
+.fa-youtube:before {
+  content: "\f167";
+}
+
+.social_icon li a[href*="instagram.com"] .fa:before,
+.fa-instagram:before {
+  content: "\f16d";
+}
+
+.social_icon li a[href*="flickr.com"] .fa:before,
+.fa-flickr:before {
+  content: "\f16e";
+}
+
+.social_icon li a[href*="tumblr.com"] .fa:before,
+.fa-tumblr:before {
+  content: "\f173";
+}
+
+.social_icon li a[href*="dribbble.com"] .fa:before,
+.fa-dribbble:before {
+  content: "\f17d";
+}
+
+.social_icon li a[href*="skype.com"] .fa:before,
+.fa-skype:before {
+  content: "\f17e";
+}
+
+.social_icon li a[href*="foursquare.com"] .fa:before,
+.fa-foursquare:before {
+  content: "\f180";
+}
+
+.social_icon li a[href*="vimeo.com"] .fa:before,
+.fa-vimeo-square:before {
+  content: "\f194";
+}
+
+.social_icon li a[href*="spotify.com"] .fa:before,
+.fa-spotify:before {
+  content: "\f1bc";
+}
+
+.social_icon li a[href*="soundcloud.com"] .fa:before,
+.fa-soundcloud:before {
+  content: "\f1be";
+}
